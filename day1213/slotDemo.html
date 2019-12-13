@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+
+        <!-- <iu-v2 v-for="article in articleList" :key="article.title" :heart="article">
+            <h5>评论：你是仙女小姐姐嘛</h5>
+        </iu-v2> -->
+
+        <iu-v2>
+            <template v-slot:title>
+                {{article.title}}
+            </template>
+            <template v-slot:author>
+                {{article.author}}
+            </template>
+            <template v-slot:date>
+                {{article.date}}
+            </template>
+            
+            {{article.content}}
+            
+        </iu-v2>
+    </div>
+    <script>
+        //定义iu这个自定义组件
+        //第一个参数是自定义组件的标签名称，第二个参数是定义该组件的运行规则对象
+        Vue.component('iu-v2',{
+            // props:['heart'],
+            //template中定义的是组件的模板，也就是html和{{}}以及vue指令的组合
+            //template必须要有根标签，例如<h1></h1><h2></h2>不合法，<div><h1></h1><h2></h2></div>合法的
+            template:'<div>'+
+                // '<h1 style="color:red">{{heart.title}}</h1>'+
+                // '<h2>作者：{{heart.anthor}}</h2>'+
+                // '<h3>时间：{{heart.publishDate}}</h3>'+
+                // '<p>{{heart.content}}</p>'+
+                // '<slot></slot>'+
+                '<h1><slot name="title></slot></h1>'+
+                '<h2><slot name="author"></slot></h2>'+
+                '<h3><slot name="date"></slot></h3>'+
+                '<p><slot></slot></p>'+
+            '</div>'
+        })
+        var app=new Vue({
+           el:"#app",
+           data:{
+               article:{
+                   title:"论题",
+                   anthor:"IU",
+                   publishDate:"2019-12-13",
+                   content:"根据以往经验来看。今天是周五。",
+                //    imgSrc:"https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3118953890,763934757&fm=26&gp=0.jpg"
+               }
+            //    article2:{
+            //        title:"vue的初学笔记",
+            //        anthor:"小张",
+            //        publishDate:"2019-12-13",
+            //        content:"Vue是一个渐进式前端框架。",
+            //        imgSrc:"https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3118953890,763934757&fm=26&gp=0.jpg"
+            //    },
+            //    articleList:[
+            //        {
+            //             title:"论题",
+            //             anthor:"IU",
+            //             publishDate:"2019-12-13",
+            //             content:"根据以往经验来看。今天是周五。"
+            //        },
+            //        {
+            //             title:"vue的初学笔记",
+            //             anthor:"小张",
+            //             publishDate:"2019-12-13",
+            //             content:"Vue是一个渐进式前端框架。",
+            //        },
+            //        {
+            //             title:"vue的学习总结",
+            //             anthor:"小张",
+            //             publishDate:"2019-12-13",
+            //             content:"运行Vue，可以实现很多功能。",
+            //        }
+            //    ]
+           },
+        })
+    </script>
+</body>
+</html>
